@@ -177,3 +177,26 @@ h3 {
 h3 {
   border-bottom: solid 2px #FFC30C;
 }
+
+.card-buttons-area {
+  display: flex;
+  justify-content: space-between;
+  border-top: solid 2px #C7D3D8;
+}
+
+.generated-todo-list-urgent
+.card-buttons-area {
+  border-top: solid 2px #FFC30C;
+}
+
+.card-button-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.card-buttons {
+  width: 20%;
+}
