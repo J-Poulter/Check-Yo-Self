@@ -28,3 +28,27 @@ h1 {
 span {
   color: #FFC30C;
 }
+
+.search-contents-container {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.search-button {
+  background-color: #C7D3D8;
+  color: #1F1F3D;
+  border-radius: 10px 0 0 10px;
+  height: 30px;
+  padding: 10px;
+  margin-right: 0;
+}
+
+.search-input {
+  font-size: 1.5em;
+  margin-right: 20px;
+  padding: 8px;
+  border-radius: 0 10px 10px 0;
+  margin-left: 0;
+  cursor: auto;
+}
