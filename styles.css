@@ -9,3 +9,22 @@ html,
 body {
   height: 100%;
 }
+
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #1F1F3D;
+  align-items: center;
+}
+
+h1 {
+  color: #FFFFFF;
+  font-weight: 800;
+  padding: 20px;
+  font-size: 2.5em;
+}
+
+span {
+  color: #FFC30C;
+}
