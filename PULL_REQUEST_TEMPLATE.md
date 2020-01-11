@@ -26,9 +26,9 @@ Please delete options that are not relevant.
 
 ## Files changed:
 
-- [] index.html
-- [] styles.css
-- [] main.js
-- [] task.js
-- [] todo-list.js
-- [] README.md
+- [ ] index.html
+- [ ] styles.css
+- [ ] main.js
+- [ ] task.js
+- [ ] todo-list.js
+- [ ] README.md
