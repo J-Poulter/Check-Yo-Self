@@ -121,3 +121,21 @@ label {
   margin-left: 0;
   border-radius: 0 5px 5px 0;
 }
+
+.create-list-buttons {
+  background-color: #1F1F3D;
+  color: #FFFFFF;
+  border-radius: 5px;
+  font-size: 1.5em;
+  margin: 20px;
+  padding: 10px;
+  width: 95%;
+  cursor: pointer;
+}
+
+.filter-urgency-button {
+  /* background-color: #EF4A23; */
+  color: #FFFFFF;
+  align-self: center;
+  margin-top: 35px;
+}
