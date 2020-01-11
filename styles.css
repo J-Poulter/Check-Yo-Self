@@ -52,3 +52,27 @@ span {
   margin-left: 0;
   cursor: auto;
 }
+
+main {
+  display: flex;
+  height: 100%;
+}
+
+.page-column {
+  width: 34%;
+  height: 100%;
+  background-color: #F3F6F7;
+  display: flex;
+  flex-direction: column;
+  border-bottom: solid 2px #3C6577;
+}
+
+.page-column:nth-child(1) {
+  background-color: #587A8A;
+  width: 32%;
+  border-right: solid 2px #3C6577;
+}
+
+.page-column:nth-child(3) {
+  border-right: solid 2px #3C6577;
+}
