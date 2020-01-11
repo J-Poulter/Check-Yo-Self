@@ -139,3 +139,18 @@ label {
   align-self: center;
   margin-top: 35px;
 }
+
+.generated-todo-list {
+  color: #1F1F3D;
+  background-color: #FAFDFFA;
+  border: solid 2px #C7D3D8;
+  width: 90%;
+  align-self: center;
+  margin-top: 30px;
+}
+
+.generated-list-items-area {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
