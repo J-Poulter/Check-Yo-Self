@@ -154,3 +154,26 @@ label {
   align-items: center;
   flex-direction: column;
 }
+
+.generated-todo-list-urgent {
+  color: #1F1F3D;
+  background-color: #FFE89D;
+  border: solid 2px #FFC30C;
+  width: 90%;
+  align-self: center;
+  margin-top: 30px;
+}
+
+.urgent-active-title {
+  color: #B23A25;
+}
+
+h3 {
+  border-bottom: solid 2px #C7D3D8;
+  padding: 10px;
+}
+
+.generated-todo-list-urgent
+h3 {
+  border-bottom: solid 2px #FFC30C;
+}
