@@ -76,3 +76,48 @@ main {
 .page-column:nth-child(3) {
   border-right: solid 2px #3C6577;
 }
+
+label {
+  color: #F3F6F7;
+  font-size: 1em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  align-self: flex-start;
+  padding-left: 10px;
+}
+
+.user-interactive-area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  border-bottom: solid 2px #3C6577;
+}
+
+.card-input-fields {
+  font-size: 1.5em;
+  border: solid 2px #1F1F3D;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 93%;
+  padding: 8px;
+}
+
+.task-item-adding-container {
+  display: flex;
+  flex-direction: row;
+  width: 95%;
+}
+
+.task-item-input {
+  border-radius: 5px 0 0 5px;
+}
+
+.add-item-button {
+  font-size: 2em;
+  height: 53px;
+  background-color: #1F1F3D;
+  color: white;
+  margin-left: 0;
+  border-radius: 0 5px 5px 0;
+}
