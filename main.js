@@ -1,0 +1,15 @@
+var searchButton = document.querySelector('.search-button-js');
+var searchInputField = document.querySelector('.search-input-js');
+var taskTitleInput = document.querySelector('.task-title-input-js');
+var listItemsTempOutput = document.querySelector('.added-list-items-output-area-js');
+var taskItemInput = document.querySelector('.task-item-input-js');
+var addTaskItemButton = document.querySelector('.add-item-button-js');
+var createTaskListButton = document.querySelector('.create-list-button-js');
+var clearInputFieldsButton = document.querySelector('.clear-input-fields-button-js');
+var filterByUrgencyButton = document.querySelector('.filter-urgency-button-js');
+var taskListOutputArea = document.querySelector('.output-column-js');
+var generatedListTitle = document.querySelector('.card-title-js');
+var generatedListItem = document.querySelector('.individual-list-item-js');
+var itemCheckboxButton = document.querySelector('.checkbox-js');
+var markListUrgentButton = document.querySelector('.urgent-button-js');
+var deleteCardButton= document.querySelector('.delete-button-js');
