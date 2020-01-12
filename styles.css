@@ -158,12 +158,22 @@ label {
   margin-bottom: 10px;
 }
 
+p,
 .individual-list-item {
   margin-bottom: 5px;
   font-size: 1.5em;
   display: flex;
   padding: 10px 10px 10px 25px;
+}
 
+.added-list-items-output-area {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.pending-list-items {
+  color: #FFFFFF;
 }
 
 .checkbox {
@@ -221,9 +231,13 @@ h3 {
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 }
 
 .card-buttons {
   width: 20%;
+}
+
+.card-button-titles {
+  padding: 0;
 }

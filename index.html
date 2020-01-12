@@ -10,46 +10,29 @@
     <nav>
       <h1>Check <span>Yo'</span> Self</h1>
       <div class="search-contents-container">
-        <input type="image" class="search-button" src="./check-yo-self-icons/search.svg">
-        <input type="text" class="search-input" placeholder="Search">
+        <input type="image" class="search-button search-button-js" src="./check-yo-self-icons/search.svg">
+        <input type="text" class="search-input search-input-js" placeholder="Search">
       </div>
     </nav>
     <main>
       <section class="page-column">
         <div class="user-interactive-area">
           <label for="list-title-input">Task Title</label>
-          <input type="text" class="card-input-fields" id="list-title-input">
-          <div class="added-list-items-output-area">
+          <input type="text" class="card-input-fields task-title-input-js" id="list-title-input">
+          <div class="added-list-items-output-area added-list-items-output-area-js">
+            <p class="pending-list-items pending-list-items-js"><img src="./check-yo-self-icons/delete.svg" class="checkbox temp-items-checkbox-js">Lorem Ipsum</p>
           </div>
           <label for="list-task-items-input">Task Item</label>
           <div class="task-item-adding-container">
-            <input type="text" class="card-input-fields task-item-input" id="list-task-items-input">
-            <input type="image" class="add-item-button" src="./check-yo-self-icons/plusicon.png">
+            <input type="text" class="card-input-fields task-item-input task-item-input-js" id="list-task-items-input">
+            <input type="image" class="add-item-button add-item-button-js" src="./check-yo-self-icons/plusicon.png">
           </div>
-          <button type="button" class="create-list-button create-list-buttons">Make Task List</button>
-          <button type="button" class="clear-input-fields-button create-list-buttons">Clear All</button>
+          <button type="button" class="create-list-button create-list-button-js create-list-buttons">Make Task List</button>
+          <button type="button" class="clear-input-fields-button clear-input-fields-button-js create-list-buttons">Clear All</button>
         </div>
-        <button type="button" class="filter-urgency-button create-list-buttons">Filter by Urgency</button>
+        <button type="button" class="filter-urgency-button filter-urgency-button-js create-list-buttons">Filter by Urgency</button>
       </section>
-      <section class="output-column">
-        <div class="generated-todo-list">
-          <h3 class="card-title-js">Placeholder for Title</h3>
-          <div class="generated-list-items-area">
-            <p class="individual-list-item"><img src="./check-yo-self-icons/checkbox.svg" class="checkbox">Temp. placeholder</p>
-            <p class="individual-list-item"><img src="./check-yo-self-icons/checkbox.svg" class="checkbox">Temp. placeholder</p>
-            <p class="individual-list-item"><img src="./check-yo-self-icons/checkbox.svg" class="checkbox">Temp. placeholder</p>
-          </div>
-          <div class="card-buttons-area">
-            <div class="card-button-title-container">
-              <input type="image" class="card-buttons" src="./check-yo-self-icons/urgent.svg">
-              <p>URGENT</p>
-            </div>
-            <div class="card-button-title-container">
-              <input type="image" class="card-buttons" src="./check-yo-self-icons/delete.svg">
-              <p>DELETE</p>
-            </div>
-          </div>
-        </div>
+      <section class="output-column output-column-js">
         <div class="generated-todo-list-urgent">
           <h3>Placeholder for Title</h3>
           <div class="generated-list-items-area">
@@ -59,11 +42,11 @@
           <div class="card-buttons-area">
             <div class="card-button-title-container">
               <input type="image" class="card-buttons" src="./check-yo-self-icons/urgent-active.svg">
-              <p class="urgent-active-title">URGENT</p>
+              <p class="urgent-active-title card-button-titles">URGENT</p>
             </div>
             <div class="card-button-title-container">
               <input type="image" class="card-buttons" src="./check-yo-self-icons/delete.svg">
-              <p>DELETE</p>
+              <p class="card-button-titles">DELETE</p>
             </div>
           </div>
         </div>
