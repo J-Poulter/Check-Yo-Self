@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <title>Check Yo'Self!</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
-    <link href="/styles.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
   </head>
   <body>
     <nav>
       <h1>Check <span>Yo'</span> Self</h1>
       <div class="search-contents-container">
-        <input type="image" class="search-button" src="/check-yo-self-icons/search.svg">
+        <input type="image" class="search-button" src="./check-yo-self-icons/search.svg">
         <input type="text" class="search-input" placeholder="Search">
       </div>
     </nav>
@@ -24,50 +24,45 @@
           <label for="list-task-items-input">Task Item</label>
           <div class="task-item-adding-container">
             <input type="text" class="card-input-fields task-item-input" id="list-task-items-input">
-            <input type="image" class="add-item-button" src="/check-yo-self-icons/plusicon.png">
+            <input type="image" class="add-item-button" src="./check-yo-self-icons/plusicon.png">
           </div>
           <button type="button" class="create-list-button create-list-buttons">Make Task List</button>
           <button type="button" class="clear-input-fields-button create-list-buttons">Clear All</button>
         </div>
         <button type="button" class="filter-urgency-button create-list-buttons">Filter by Urgency</button>
       </section>
-      <section class="page-column">
+      <section class="output-column">
         <div class="generated-todo-list">
-          <h3>Placeholder for Title</h3>
+          <h3 class="card-title-js">Placeholder for Title</h3>
           <div class="generated-list-items-area">
-            <p>Temp. placeholder</p>
-            <p>Temp. placeholder</p>
-            <p>Temp. placeholder</p>
-            <p>Temp. placeholder</p>
+            <p class="individual-list-item"><img src="./check-yo-self-icons/checkbox.svg" class="checkbox">Temp. placeholder</p>
+            <p class="individual-list-item"><img src="./check-yo-self-icons/checkbox.svg" class="checkbox">Temp. placeholder</p>
+            <p class="individual-list-item"><img src="./check-yo-self-icons/checkbox.svg" class="checkbox">Temp. placeholder</p>
           </div>
           <div class="card-buttons-area">
             <div class="card-button-title-container">
-              <input type="image" class="card-buttons" src="/check-yo-self-icons/urgent.svg">
+              <input type="image" class="card-buttons" src="./check-yo-self-icons/urgent.svg">
               <p>URGENT</p>
             </div>
             <div class="card-button-title-container">
-              <input type="image" class="card-buttons" src="/check-yo-self-icons/delete.svg">
+              <input type="image" class="card-buttons" src="./check-yo-self-icons/delete.svg">
               <p>DELETE</p>
             </div>
           </div>
         </div>
-      </section>
-      <section class="page-column">
         <div class="generated-todo-list-urgent">
           <h3>Placeholder for Title</h3>
           <div class="generated-list-items-area">
-            <p>Temp. placeholder</p>
-            <p>Temp. placeholder</p>
-            <p>Temp. placeholder</p>
-            <p>Temp. placeholder</p>
+            <p class="individual-list-item"><img src="./check-yo-self-icons/checkbox.svg" class="checkbox"> Temp. placeholder</p>
+            <p class="individual-list-item"><img src="./check-yo-self-icons/checkbox.svg" class="checkbox"> Temp. placeholder</p>
           </div>
           <div class="card-buttons-area">
             <div class="card-button-title-container">
-              <input type="image" class="card-buttons" src="/check-yo-self-icons/urgent-active.svg">
+              <input type="image" class="card-buttons" src="./check-yo-self-icons/urgent-active.svg">
               <p class="urgent-active-title">URGENT</p>
             </div>
             <div class="card-button-title-container">
-              <input type="image" class="card-buttons" src="/check-yo-self-icons/delete.svg">
+              <input type="image" class="card-buttons" src="./check-yo-self-icons/delete.svg">
               <p>DELETE</p>
             </div>
           </div>
