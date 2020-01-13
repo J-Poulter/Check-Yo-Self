@@ -17,7 +17,6 @@ var clearInputFieldsButton = document.querySelector('.clear-input-fields-button-
 var filterByUrgencyButton = document.querySelector('.filter-urgency-button-js');
 var taskListOutputArea = document.querySelector('.output-column-js');
 var globalSelector = document.querySelector('body');
-
 globalSelector.addEventListener('click', clickHandler);
 globalSelector.addEventListener('input', enableButtons);
 
@@ -29,7 +28,10 @@ markListUrgentButton.disabled = true;
 
 function clickHandler() {
   if (event.target.classList.contains('create-list-button-js')) {
-    populateToDoList(); 
+    populateToDoList();
+  }
+  if (event.target.classList.contains('clear-input-fields-button-js')) {
+    clearInputFields();
   }
 }
 
@@ -37,6 +39,12 @@ function enableButtons() {
   createTaskListButton.disabled = taskTitleInput.value === '';
   addTaskItemButton.disabled = taskItemInput.value === '';
   clearInputFieldsButton.disabled = taskItemInput.value.length + taskTitleInput.value.length == 0;
+}
+
+function clearInputFields() {
+  taskItemInput.value = '';
+  taskTitleInput.value = '';
+  enableButtons();
 }
 
 function populateToDoList() {
