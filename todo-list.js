@@ -1,9 +1,25 @@
 class ToDoCard {
-  constructor() {
-    this.title = ToDoCard.title;
-    this.listId = ToDoCard.listId || generateListId();
-    this.individualTasks = ToDoCard.individualTasks || [];
-    this.isUrgent = ToDoCard.isUrgent || false;
-    this.canDelete = ToDoCard.canDelete || false;
+  constructor(toDoCard) {
+    this.title = toDoCard.title;
+    this.listId = toDoCard.listId
+    this.individualTasks = toDoCard.individualTasks || [];
+    this.isUrgent = toDoCard.isUrgent || false;
+    this.canDelete = toDoCard.canDelete || false;
+  }
+
+  saveToStorage(currentCard, title) {
+    localStorage.setItem(title, JSON.stringify(currentCard));
+  }
+
+  deleteFromStorage() {
+
+  }
+
+  updateTask() {
+
+  }
+
+  updateToDo() {
+
   }
 }

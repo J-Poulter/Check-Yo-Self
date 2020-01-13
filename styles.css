@@ -169,6 +169,7 @@ p,
 .added-list-items-output-area {
   display: flex;
   align-items: flex-start;
+  flex-direction: column;
   width: 100%;
 }
 
