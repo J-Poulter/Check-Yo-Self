@@ -1,7 +1,7 @@
-class ToDoCard {
+class ToDoList {
   constructor(toDoCard) {
     this.title = toDoCard.title;
-    this.listId = toDoCard.listId
+    this.listId = toDoCard.listId;
     this.individualTasks = toDoCard.individualTasks || [];
     this.isUrgent = toDoCard.isUrgent || false;
     this.canDelete = toDoCard.canDelete || false;
