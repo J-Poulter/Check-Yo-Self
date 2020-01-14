@@ -6,6 +6,7 @@ var deleteCardButton = document.querySelectorAll('.delete-button-js');
 var pendingListItems = document.querySelectorAll('.pending-list-items-js');
 var tempItemsCheckbox = document.querySelectorAll('.temp-items-checkbox-js');
 var currentListItems = [];
+var addListsNotice = document.querySelector('.add-lists-notice-js');
 var searchButton = document.querySelector('.search-button-js');
 var searchInputField = document.querySelector('.search-input-js');
 var taskTitleInput = document.querySelector('.task-title-input-js');
@@ -43,9 +44,13 @@ function clickHandler() {
 }
 
 function enableButtons() {
-  createTaskListButton.disabled = taskTitleInput.value === '';
   addTaskItemButton.disabled = taskItemInput.value === '';
   clearInputFieldsButton.disabled = taskItemInput.value.length + taskTitleInput.value.length == 0;
+  if (taskTitleInput.value && listItemsTempOutputArea.innerText != '') {
+      createTaskListButton.disabled = false;
+  } else {
+      createTaskListButton.disabled = true
+  }
 }
 
 function clearInputFields() {
@@ -54,6 +59,15 @@ function clearInputFields() {
   listItemsTempOutputArea.innerHTML = '';
   currentListItems = [];
   enableButtons();
+}
+
+function toggleWarningDisplay() {
+  if (localStorage.length == 0) {
+    addListsNotice.classList.remove('hidden');
+  }
+  else {
+    addListsNotice.classList.add('hidden');
+  }
 }
 
 function createListHelper() {
@@ -80,6 +94,7 @@ function createListObject() {
     individualTasks: currentListItems
     })
   currentCard.saveToStorage(currentCard, currentCard.listId);
+  toggleWarningDisplay();
 }
 
 function populateTempListItems(currentItem) {
@@ -116,7 +131,6 @@ function createTaskList() {
     </div>
   </div>`);
   clearInputFields();
-
 }
 
 function populateListItems() {
@@ -125,15 +139,46 @@ function populateListItems() {
     tempTaskItemHTML += `<p class="individual-list-item individual-list-item-js">
     <img src="./check-yo-self-icons/checkbox.svg" id=${currentListItems[i].taskId} class="checkbox checkbox-js">${currentListItems[i].taskDescription}</p>
   `
-  }
+}
   return tempTaskItemHTML;
 }
 
 
 
 function retrieveStorageAndCards() {
-  var parsedStorageItems = JSON.parse(localStorage.getItem((i)))
+  toggleWarningDisplay();
   for (var i = 0; i < localStorage.length; i ++) {
-
+    var currentCard = JSON.parse(localStorage.getItem(localStorage.key(i)))
+    populateCardFromStorage(currentCard);
   }
+}
+
+function populateCardFromStorage(currentCard) {
+  taskListOutputArea.insertAdjacentHTML('beforeend',
+  `<div class="generated-todo-list">
+    <h3 class="card-title-js">${currentCard.title}</h3>
+    <div class="generated-list-items-area">
+      ${populateListItemsFromStorage(currentCard)}
+    </div>
+    <div class="card-buttons-area">
+      <div class="card-button-title-container">
+        <input type="image" class="card-buttons urgent-button-js" src="./check-yo-self-icons/urgent.svg">
+        <p class="card-button-titles">URGENT</p>
+      </div>
+      <div class="card-button-title-container">
+        <input type="image" data-id=${currentCard.listId} class="card-buttons delete-button-js" src="./check-yo-self-icons/delete.svg">
+        <p class="card-button-titles">DELETE</p>
+      </div>
+    </div>
+  </div>`);
+}
+
+function populateListItemsFromStorage(currentCard) {
+  var tempTaskItemHTML = '';
+  for (var i = 0; i < currentCard.individualTasks.length; i++) {
+    tempTaskItemHTML += `<p class="individual-list-item individual-list-item-js">
+    <img src="./check-yo-self-icons/checkbox.svg" data-id=${currentCard.individualTasks[i].taskId} class="checkbox checkbox-js">${currentCard.individualTasks[i].taskDescription}</p>
+  `
+}
+  return tempTaskItemHTML;
 }
