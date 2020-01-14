@@ -235,3 +235,12 @@ h3 {
 .card-button-titles {
   padding: 0;
 }
+
+h2 {
+  color: orange;
+  font-size: 3em;
+}
+
+.hidden {
+  display: none;
+}
