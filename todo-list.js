@@ -7,19 +7,19 @@ class ToDoList {
     this.canDelete = toDoCard.canDelete || false;
   }
 
-  saveToStorage(currentCard, title) {
+  saveToStorage(title, currentCard) {
     localStorage.setItem(title, JSON.stringify(currentCard));
   }
 
-  deleteFromStorage() {
-
+  deleteFromStorage(targetCard) {
+    localStorage.removeItem(targetCard);
   }
 
-  updateTask() {
-
+  updateTask(title, currentCard) {
+    localStorage.setItem(title, JSON.stringify(currentCard));
   }
 
-  updateToDo() {
-
+  updateToDo(title, currentCard) {
+    localStorage.setItem(title, JSON.stringify(currentCard));
   }
 }
