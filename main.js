@@ -8,7 +8,6 @@ var pendingListItems = document.querySelectorAll('.pending-list-items-js');
 var tempItemsCheckbox = document.querySelectorAll('.temp-items-checkbox-js');
 var currentListItems = [];
 
-// var currentCard = new ToDoList({});
 var addListsNotice = document.querySelector('.add-lists-notice-js');
 var addTaskItemButton = document.querySelector('.add-item-button-js');
 var clearInputFieldsButton = document.querySelector('.clear-input-fields-button-js');
@@ -47,6 +46,12 @@ function clickHandler() {
   }
   if (event.target.classList.contains('checkbox-js')) {
     toggleItemDone(event.target.dataset.id, event.target.id);
+  }
+  if (event.target.classList.contains('delete-button-js')) {
+    removeEntireCard(event.target.id);
+  }
+  if (event.target.classList.contains('urgent-button-js')) {
+    toggleUrgentStatus(event.target.dataset.id);
   }
 }
 
@@ -99,7 +104,7 @@ function createListObject() {
     listId: Date.now(),
     individualTasks: currentListItems
     })
-  currentCard.saveToStorage(currentCard, currentCard.listId);
+  currentCard.saveToStorage(currentCard.listId, currentCard);
   debugger
   toggleWarningDisplay();
   createTaskList(currentCard);
@@ -123,9 +128,9 @@ function removeTempListItem() {
 function createTaskList(currentCard) {
   taskListOutputArea.insertAdjacentHTML('beforeend',
   `<div class="generated-todo-list">
-    <h3 class="card-title-js">${taskTitleInput.value}</h3>
+    <h3 class="card-title-js">${currentCard.title}</h3>
     <div class="generated-list-items-area">
-      ${populateListItems()}
+      ${populateListItems(currentCard)}
     </div>
     <div class="card-buttons-area">
       <div class="card-button-title-container">
@@ -133,19 +138,18 @@ function createTaskList(currentCard) {
         <p class="card-button-titles">URGENT</p>
       </div>
       <div class="card-button-title-container">
-        <input type="image" disabled class="card-buttons delete-button-js card-delete-button-js" src="./check-yo-self-icons/delete.svg">
-        <input type="image" dataset-id=${currentCard.listId} class="hidden card-buttons delete-button-js card-delete-button-js" src="./check-yo-self-icons/delete-active.svg">
+        <input type="image" disabled id=${currentCard.listId} class="card-buttons delete-button-js card-delete-button-js" src="./check-yo-self-icons/delete.svg">
         <p class="card-button-titles">DELETE</p>
       </div>
     </div>
   </div>`);
 }
 
-function populateListItems() {
+function populateListItems(currentCard) {
   var tempTaskItemHTML = '';
   for (var i = 0; i < currentListItems.length; i++) {
     tempTaskItemHTML += `<p class="individual-list-item individual-list-item-js">
-    <img src="./check-yo-self-icons/checkbox.svg" data-id=${currentListItems[i].taskId} class="checkbox checkbox-js">
+    <img src="./check-yo-self-icons/checkbox.svg" data-id=${currentCard.listId} id=${currentListItems[i].taskId} class="checkbox checkbox-js">
     ${currentListItems[i].taskDescription}</p>
   `}
   return tempTaskItemHTML;
@@ -154,11 +158,15 @@ function populateListItems() {
 
 
 function retrieveStorageAndCards() {
+
   for (var i = 0; i < localStorage.length; i ++) {
     var currentCard = JSON.parse(localStorage.getItem(localStorage.key(i)))
+    var instantiatedCard = new ToDoList ({title: currentCard.title, listId: currentCard.listId, individualTasks: currentCard.individualTasks, isUrgent: currentCard.isUrgent, canDelete: currentCard.canDelete});
     populateCardFromStorage(currentCard);
+    deleteCardButtonStatus(instantiatedCard);
+    toggleUrgentStatus(instantiatedCard.listId);
   }
-  toggleWarningDisplay();
+    toggleWarningDisplay();
 }
 
 function populateCardFromStorage(currentCard) {
@@ -170,11 +178,11 @@ function populateCardFromStorage(currentCard) {
     </div>
     <div class="card-buttons-area">
       <div class="card-button-title-container">
-        <input type="image" class="card-buttons urgent-button-js" src="${checkUrgentStatus(currentCard)}">
+        <input type="image" data-id=${currentCard.listId} class="card-buttons urgent-button-js" src="${checkUrgentStatus(currentCard)}">
         <p class="card-button-titles">URGENT</p>
       </div>
       <div class="card-button-title-container">
-        <input type="image" disabled data-id=${currentCard.listId} class="card-buttons delete-button-js card-delete-button-js" src="./check-yo-self-icons/delete.svg">
+        <input type="image" disabled id=${currentCard.listId} class="card-buttons delete-button-js card-delete-button-js" src="./check-yo-self-icons/delete.svg">
         <p class="card-button-titles">DELETE</p>
       </div>
     </div>
@@ -186,6 +194,7 @@ function populateListItemsFromStorage(currentCard) {
   for (var i = 0; i < currentCard.individualTasks.length; i++) {
     tempTaskItemHTML += `<p class="individual-list-item individual-list-item-js">
     <img src="${itemDoneStatus(currentCard.individualTasks[i])}" data-id=${currentCard.listId} id=${currentCard.individualTasks[i].taskId} class="checkbox checkbox-js">
+    ${currentCard.individualTasks[i].taskDescription}</p>
   `}
   return tempTaskItemHTML;
 }
@@ -194,7 +203,7 @@ function itemDoneStatus(individualTasks) {
   if (individualTasks.isDone === true) {
     return "./check-yo-self-icons/checkbox-active.svg"
   }
-  else if (individualTasks.isDone ===false) {
+  else if (individualTasks.isDone === false) {
     return "./check-yo-self-icons/checkbox.svg"
   }
 }
@@ -203,7 +212,7 @@ function checkUrgentStatus(currentCard) {
   if (currentCard.isUrgent === true) {
     return "./check-yo-self-icons/urgent-active.svg"
   }
-  else if (currentCard.isUrgent === true) {
+  else if (currentCard.isUrgent === false) {
     return "./check-yo-self-icons/urgent.svg"
   }
 }
@@ -211,18 +220,55 @@ function checkUrgentStatus(currentCard) {
 function toggleItemDone(cardTarget, itemTarget) {
   var currentCard = JSON.parse(localStorage.getItem(cardTarget));
   var instantiatedCard = new ToDoList ({title: currentCard.title, listId: currentCard.listId, individualTasks: currentCard.individualTasks, isUrgent: currentCard.isUrgent, canDelete: currentCard.canDelete});
-  var currentTask = currentCard.individualTasks.find(item => item = itemTarget);
+  var currentTask = currentCard.individualTasks.find(item => item.taskId == itemTarget);
   currentTask.isDone = !currentTask.isDone;
-  if (currentTask.isDone == true) {markItemIncomplete()}
-  else {markItemComplete()}
-  instantiatedCard.saveToStorage(instantiatedCard, cardTarget)
+  switchButtonStatus(currentTask);
+  instantiatedCard.updateTask(cardTarget, instantiatedCard);
+  deleteCardButtonStatus(instantiatedCard);
 }
 
-function markItemIncomplete() {
+function switchButtonStatus(itemStatus) {
+  if (itemStatus.isDone === true) {
+    event.target.src = "./check-yo-self-icons/checkbox-active.svg"
+  } else if (itemStatus.isDone === false) {
+    event.target.src = "./check-yo-self-icons/checkbox.svg"
+  }
 }
 
-function markItemComplete() {
-  for (var i = 0; i < itemCheckboxActive.length; i++)
-  if (itemCheckboxActive[i].dataset.id == event.target.id) {itemCheckboxActive[i].classList.remove('hidden');
+function removeEntireCard(targetCard) {
+  var currentCard = JSON.parse(localStorage.getItem(targetCard));
+  var instantiatedCard = new ToDoList ({title: currentCard.title, listId: currentCard.listId, individualTasks: currentCard.individualTasks, isUrgent: currentCard.isUrgent, canDelete: currentCard.canDelete});
+  instantiatedCard.deleteFromStorage(targetCard);
+  event.target.parentElement.parentElement.parentElement.remove();
+  toggleWarningDisplay();
+}
+
+function deleteCardButtonStatus(currentCard) {
+  var falseCounter = 0;
+  for (var i = 0; i < currentCard.individualTasks.length; i++ ) {
+    if (currentCard.individualTasks[i].isDone === false) {
+      falseCounter++
+    }
+  }
+  if (falseCounter > 0) {
+    currentCard.canDelete = false;
+    document.getElementById(currentCard.listId).disabled = true;
+  }
+  else if (falseCounter == 0) {
+    currentCard.canDelete = true;
+    document.getElementById(currentCard.listId).disabled = false;
+  }
+  currentCard.updateToDo(currentCard.listId, currentCard);
+}
+
+function toggleUrgentStatus(id) {
+  var currentCard = JSON.parse(localStorage.getItem(id));
+  var instantiatedCard = new ToDoList ({title: currentCard.title, listId: currentCard.listId, individualTasks: currentCard.individualTasks, isUrgent: currentCard.isUrgent, canDelete: currentCard.canDelete});
+  instantiatedCard.isUrgent = !instantiatedCard.isUrgent;
+  instantiatedCard.updateToDo(id, instantiatedCard);
+  if (instantiatedCard.isUrgent === true) {
+    event.target.src = "./check-yo-self-icons/urgent-active.svg"
+  } else if (instantiatedCard.isUrgent === false) {
+    event.target.src = "./check-yo-self-icons/urgent.svg"
   }
 }
