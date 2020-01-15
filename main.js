@@ -105,7 +105,6 @@ function createListObject() {
     individualTasks: currentListItems
     })
   currentCard.saveToStorage(currentCard.listId, currentCard);
-  debugger
   toggleWarningDisplay();
   createTaskList(currentCard);
 }
@@ -134,7 +133,7 @@ function createTaskList(currentCard) {
     </div>
     <div class="card-buttons-area">
       <div class="card-button-title-container">
-        <input type="image" class="card-buttons urgent-button-js" src="./check-yo-self-icons/urgent.svg">
+        <input type="image" data-id=${currentCard.listId} class="card-buttons urgent-button-js" src="./check-yo-self-icons/urgent.svg">
         <p class="card-button-titles">URGENT</p>
       </div>
       <div class="card-button-title-container">
@@ -164,14 +163,14 @@ function retrieveStorageAndCards() {
     var instantiatedCard = new ToDoList ({title: currentCard.title, listId: currentCard.listId, individualTasks: currentCard.individualTasks, isUrgent: currentCard.isUrgent, canDelete: currentCard.canDelete});
     populateCardFromStorage(currentCard);
     deleteCardButtonStatus(instantiatedCard);
-    toggleUrgentStatus(instantiatedCard.listId);
+    // populateUrgentStatus(instantiatedCard);
   }
     toggleWarningDisplay();
 }
 
 function populateCardFromStorage(currentCard) {
   taskListOutputArea.insertAdjacentHTML('beforeend',
-  `<div class="generated-todo-list">
+  `<div class=${determineUrgentClass(currentCard)}>
     <h3 class="card-title-js">${currentCard.title}</h3>
     <div class="generated-list-items-area">
       ${populateListItemsFromStorage(currentCard)}
@@ -267,8 +266,19 @@ function toggleUrgentStatus(id) {
   instantiatedCard.isUrgent = !instantiatedCard.isUrgent;
   instantiatedCard.updateToDo(id, instantiatedCard);
   if (instantiatedCard.isUrgent === true) {
-    event.target.src = "./check-yo-self-icons/urgent-active.svg"
+    event.target.src = "./check-yo-self-icons/urgent-active.svg";
+    event.target.parentElement.parentElement.parentElement.classList.add('generated-todo-list-urgent');
   } else if (instantiatedCard.isUrgent === false) {
-    event.target.src = "./check-yo-self-icons/urgent.svg"
+    event.target.src = "./check-yo-self-icons/urgent.svg";
+    event.target.parentElement.parentElement.parentElement.classList.remove('generated-todo-list-urgent');
+    event.target.parentElement.parentElement.parentElement.classList.add('generated-todo-list');
+  }
+}
+
+function determineUrgentClass(instantiatedCard) {
+  if (instantiatedCard.isUrgent === true) {
+    return "generated-todo-list-urgent"
+  } else if (instantiatedCard.isUrgent === false) {
+    return "generated-todo-list"
   }
 }
