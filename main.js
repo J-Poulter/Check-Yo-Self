@@ -277,15 +277,14 @@ function searchingCards() {
   var searchThis = searchInputField.value.toLowerCase();
   var savedNames = Object.keys(localStorage);
   taskListOutputArea.innerHTML = '';
-  var filteredCards = savedNames.map( card => {
-    return JSON.parse(localStorage.getItem(card))
+  var parsedToDos = savedNames.map(key => {
+    return JSON.parse(localStorage.getItem(key))
   })
-  var newFiltered = filteredCards.filter( card => {
+  var newFiltered = parsedToDos.filter(card => {
     var loweredCase = card.title.toLowerCase()
     return loweredCase.includes(searchThis)
   })
   newFiltered.forEach(card => {
     createTaskList(card)
   })
-
 }
