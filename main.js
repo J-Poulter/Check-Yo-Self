@@ -1,13 +1,4 @@
-var deleteCardButton = document.querySelectorAll('.delete-button-js');
-var generatedListItem = document.querySelectorAll('.individual-list-item-js');
-var generatedListTitle = document.querySelectorAll('.card-title-js');
-var itemCheckboxButton = document.querySelectorAll('.checkbox-js');
-var itemCheckboxActive = document.querySelectorAll('.checkbox-active-js');
-var markListUrgentButton = document.querySelectorAll('.urgent-button-js');
-var pendingListItems = document.querySelectorAll('.pending-list-items-js');
-var tempItemsCheckbox = document.querySelectorAll('.temp-items-checkbox-js');
 var currentListItems = [];
-
 var addListsNotice = document.querySelector('.add-lists-notice-js');
 var addTaskItemButton = document.querySelector('.add-item-button-js');
 var clearInputFieldsButton = document.querySelector('.clear-input-fields-button-js');
@@ -23,13 +14,12 @@ var taskTitleInput = document.querySelector('.task-title-input-js');
 
 globalSelector.addEventListener('click', clickHandler);
 globalSelector.addEventListener('input', enableButtons);
+searchInputField.addEventListener('keyup', searchingCards);
 window.addEventListener('load', retrieveStorageAndCards);
 
 addTaskItemButton.disabled = true;
 createTaskListButton.disabled = true;
 clearInputFieldsButton.disabled = true;
-deleteCardButton.disabled = true;
-markListUrgentButton.disabled = true;
 
 function clickHandler() {
   if (event.target.classList.contains('create-list-button-js')) {
@@ -281,4 +271,21 @@ function determineUrgentClass(instantiatedCard) {
   } else if (instantiatedCard.isUrgent === false) {
     return "generated-todo-list"
   }
+}
+
+function searchingCards() {
+  var searchThis = searchInputField.value.toLowerCase();
+  var savedNames = Object.keys(localStorage);
+  taskListOutputArea.innerHTML = '';
+  var filteredCards = savedNames.map( card => {
+    return JSON.parse(localStorage.getItem(card))
+  })
+  var newFiltered = filteredCards.filter( card => {
+    var loweredCase = card.title.toLowerCase()
+    return loweredCase.includes(searchThis)
+  })
+  newFiltered.forEach(card => {
+    createTaskList(card)
+  })
+
 }
