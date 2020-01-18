@@ -11,6 +11,7 @@ var searchInputField = document.querySelector('.search-input-js');
 var taskItemInput = document.querySelector('.task-item-input-js');
 var taskListOutputArea = document.querySelector('.output-column-js');
 var taskTitleInput = document.querySelector('.task-title-input-js');
+var filterUrgentCounter = 0;
 
 globalSelector.addEventListener('click', clickHandler);
 globalSelector.addEventListener('input', enableButtons);
@@ -42,6 +43,10 @@ function clickHandler() {
   }
   if (event.target.classList.contains('urgent-button-js')) {
     toggleUrgentStatus(event.target.dataset.id);
+  }
+  if (event.target.classList.contains('filter-urgency-button-js')) {
+    debugger
+    determineFilterByUrgentStatus();
   }
 }
 
@@ -285,6 +290,33 @@ function searchingCards() {
     return loweredCase.includes(searchThis)
   })
   newFiltered.forEach(card => {
-    createTaskList(card)
+    populateCardFromStorage(card)
+  })
+}
+
+function determineFilterByUrgentStatus() {
+  filterUrgentCounter++;
+  if (filterUrgentCounter % 2 === 0) {
+    taskListOutputArea.innerHTML = '';
+    filterByUrgencyButton.classList.remove('urgent-coloring')
+    retrieveStorageAndCards();
+  }
+  else if (filterUrgentCounter % 2 != 0) {
+    filterByUrgent();
+    filterByUrgencyButton.classList.add('urgent-coloring')
+  }
+}
+
+function filterByUrgent() {
+  var savedNames = Object.keys(localStorage);
+  taskListOutputArea.innerHTML = '';
+  var parsedToDos = savedNames.map(key => {
+    return JSON.parse(localStorage.getItem(key))
+  })
+  var filteredUrgents = parsedToDos.filter(card => {
+    return card.isUrgent===true;
+  })
+  filteredUrgents.forEach(card => {
+    populateCardFromStorage(card)
   })
 }

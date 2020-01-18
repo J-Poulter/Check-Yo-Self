@@ -1,8 +1,8 @@
 * {
   border: none;
   font-family: 'Open Sans', sans-serif;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 
@@ -12,18 +12,18 @@ body {
 }
 
 nav {
-  width: 100%;
+  align-items: center;
+  background-color: #1F1F3D;
   display: flex;
   justify-content: space-between;
-  background-color: #1F1F3D;
-  align-items: center;
+  width: 100%;
 }
 
 h1 {
   color: #FFFFFF;
   font-weight: 800;
-  padding: 20px;
   font-size: 2.5em;
+  padding: 20px;
 }
 
 span {
@@ -143,6 +143,11 @@ label {
   color: #FFFFFF;
   align-self: center;
   width: 95%;
+}
+
+.urgent-coloring {
+  background-color: #FFE89D;
+  color: red;
 }
 
 .generated-todo-list {
